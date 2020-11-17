@@ -1,22 +1,23 @@
+language: generic
 sudo: required
 services:
   - docker
 
 before_install:
-  - docker build -t cristimg/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t jalbacristian0493/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true cristimg/react-test npm test
+  - docker run -e CI=true jalbacristian0493/react-test npm test
 
 after_success:
-  - docker build -t cristi/multi-client ./client
-  - docker build -t cristi/multi-nginx ./nginx
-  - docker build -t cristi/multi-server ./server
-  - docker build -t cristi/multi-worker ./worker
+  - docker build -t jalbacristian0493/multi-client ./client
+  - docker build -t jalbacristian0493/multi-nginx ./nginx
+  - docker build -t jalbacristian0493/multi-server ./server
+  - docker build -t jalbacristian0493/multi-worker ./worker
   # Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push cristi/multi-client
-  - docker push cristi/multi-nginx
-  - docker push cristi/multi-server
-  - docker push cristi/multi-worker
+  - docker push jalbacristian0493/multi-client
+  - docker push jalbacristian0493/multi-nginx
+  - docker push jalbacristian0493/multi-server
+  - docker push jalbacristian0493/multi-worker
